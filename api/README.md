@@ -6,19 +6,19 @@
 npm install
 ```
 
-Second, make sure to have a database deployed. In this case it must be a Postgres database.
+deploy a postgres database.
 
 ```
 docker run --name postgres-container -e POSTGRES_PASSWORD=postgres -d postgres
 ```
 
-Then log into the database and create a working database.
+check database connection
 
 ```
 docker exec -it postgres-container psql -U postgres
 ```
 
-Next we must create a working database
+create db.
 
 ```
 CREATE DATABASE <dbname>;
