@@ -1,9 +1,9 @@
 module.exports = {
   HOST: "172.17.0.2",
-  USER: "postgres",
-  PASSWORD: "postgres",
-  DB: "testdb",
-  dialect: "postgres",
+  USER: "root",
+  PASSWORD: "database123456",
+  DB: "tshirt_test",
+  dialect: "mariadb",
   pool: {
     max: 5,
     min: 0,

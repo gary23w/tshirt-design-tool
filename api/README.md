@@ -1,4 +1,4 @@
-# Node.js – JWT Authentication for PostgreSQL
+# Node.js – JWT Authentication for MariaDB
 
 ## Project setup
 
@@ -6,22 +6,20 @@
 npm install
 ```
 
-deploy a postgres database.
+deploy a mariadb database.
 
 ```
-docker run --name postgres-container -e POSTGRES_PASSWORD=postgres -d postgres
+docker run -e MYSQL_ROOT_PASSWORD=database123456 -e MYSQL_DATABASE=testdb --name tshirt_store -v "$PWD/database":/var/lib/mysql -d mariadb:latest
 ```
 
 check database connection
 
 ```
-docker exec -it postgres-container psql -U postgres
-```
+docker exec -it tshirt_store /bin/mysql -h localhost -p
 
-create db.
+show databases;
 
-```
-CREATE DATABASE <dbname>;
+*make sure your database is initialized
 ```
 
 Then, edit `app/config/db.config.js` with correct DB credentials.
