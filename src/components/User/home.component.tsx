@@ -1,6 +1,8 @@
 import { Component } from "react";
 
-import UserService from "../services/user.service";
+import UserService from "../../services/user.service";
+
+import Editor from "../Designer/Editor/Editor";
 
 type Props = {};
 
@@ -38,10 +40,8 @@ export default class Home extends Component<Props, State> {
   render() {
     return (
       <div className="container">
-        <header className="jumbotron">
-          <h3>{this.state.content}</h3>
-          <h1>TEST</h1>
-        </header>
+        <p>{this.state.content}</p>
+        <Editor />
       </div>
     );
   }

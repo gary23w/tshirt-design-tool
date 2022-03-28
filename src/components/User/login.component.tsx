@@ -3,7 +3,7 @@ import { RouteComponentProps } from "react-router-dom";
 import { Formik, Field, Form, ErrorMessage } from "formik";
 import * as Yup from "yup";
 
-import AuthService from "../services/auth.service";
+import AuthService from "../../services/auth.service";
 
 interface RouterProps {
   history: string;
@@ -12,10 +12,10 @@ interface RouterProps {
 type Props = RouteComponentProps<RouterProps>;
 
 type State = {
-  username: string,
-  password: string,
-  loading: boolean,
-  message: string
+  username: string;
+  password: string;
+  loading: boolean;
+  message: string;
 };
 
 export default class Login extends Component<Props, State> {
@@ -27,7 +27,7 @@ export default class Login extends Component<Props, State> {
       username: "",
       password: "",
       loading: false,
-      message: ""
+      message: "",
     };
   }
 
@@ -43,16 +43,15 @@ export default class Login extends Component<Props, State> {
 
     this.setState({
       message: "",
-      loading: true
+      loading: true,
     });
-
 
     AuthService.login(username, password).then(
       () => {
         this.props.history.push("/profile");
         window.location.reload();
       },
-      error => {
+      (error) => {
         const resMessage =
           (error.response &&
             error.response.data &&
@@ -62,7 +61,7 @@ export default class Login extends Component<Props, State> {
 
         this.setState({
           loading: false,
-          message: resMessage
+          message: resMessage,
         });
       }
     );
@@ -103,7 +102,11 @@ export default class Login extends Component<Props, State> {
 
               <div className="form-group">
                 <label htmlFor="password">Password</label>
-                <Field name="password" type="password" className="form-control" />
+                <Field
+                  name="password"
+                  type="password"
+                  className="form-control"
+                />
                 <ErrorMessage
                   name="password"
                   component="div"
@@ -112,7 +115,11 @@ export default class Login extends Component<Props, State> {
               </div>
 
               <div className="form-group">
-                <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
+                <button
+                  type="submit"
+                  className="btn btn-primary btn-block"
+                  disabled={loading}
+                >
                   {loading && (
                     <span className="spinner-border spinner-border-sm"></span>
                   )}

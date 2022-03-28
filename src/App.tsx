@@ -6,13 +6,13 @@ import "./App.css";
 import AuthService from "./services/auth.service";
 import IUser from "./types/user.type";
 
-import Login from "./components/login.component";
-import Register from "./components/register.component";
-import Home from "./components/home.component";
-import Profile from "./components/profile.component";
-import BoardUser from "./components/board-user.component";
-import BoardModerator from "./components/board-moderator.component";
-import BoardAdmin from "./components/board-admin.component";
+import Login from "./components/User/login.component";
+import Register from "./components/User/register.component";
+import Home from "./components/User/home.component";
+import Profile from "./components/User/profile.component";
+import BoardUser from "./components/User/board-user.component";
+import BoardModerator from "./components/User/board-moderator.component";
+import BoardAdmin from "./components/User/board-admin.component";
 
 import EventBus from "./common/EventBus";
 

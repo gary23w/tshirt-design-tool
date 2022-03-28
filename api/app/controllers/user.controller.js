@@ -1,5 +1,6 @@
 exports.allAccess = (req, res) => {
-  res.status(200).send("Public Content.");
+  var date = new Date();
+  res.status(200).send("Public Content." + date);
 };
 
 exports.userBoard = (req, res) => {
