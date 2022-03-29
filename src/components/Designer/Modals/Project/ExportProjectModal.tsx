@@ -40,6 +40,7 @@ function ExportProjectModal({ exportFunction }: Props): ReactElement {
             <Form.Label>Project Name: </Form.Label>
             <Form.Control
               required
+              className="form-control-export"
               type="text"
               onChange={handleOnChange}
               value={fileName}

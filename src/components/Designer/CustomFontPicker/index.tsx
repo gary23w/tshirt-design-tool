@@ -29,7 +29,7 @@ const CustomMenu = React.forwardRef(
       >
         <FormControl
           autoFocus
-          className="mx-3 my-2 w-auto"
+          className="mx-3 my-2 w-auto font-filter-input"
           placeholder="Type to filter..."
           onChange={(e) => setValue(e.target.value)}
           value={value}
@@ -74,7 +74,7 @@ FontPicker.prototype.render = function () {
         {activeFontFamily}
       </Dropdown.Toggle>
 
-      <Dropdown.Menu as={CustomMenu}>
+      <Dropdown.Menu as={CustomMenu} className="font-drp-down">
         {loadingStatus === "finished" && fonts
           ? fonts.map((font) => (
               <Dropdown.Item

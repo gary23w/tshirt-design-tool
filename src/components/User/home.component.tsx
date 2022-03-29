@@ -40,7 +40,6 @@ export default class Home extends Component<Props, State> {
   render() {
     return (
       <div className="container">
-        <p>{this.state.content}</p>
         <Editor />
       </div>
     );

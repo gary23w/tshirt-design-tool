@@ -8,7 +8,7 @@ import {
   ButtonGroup,
 } from "react-bootstrap";
 import Canvas, { CanvasController, CanvasOrderDirection } from "./Canvas";
-import FontPicker from "../CustomFontPicker/font-picker-react";
+import FontPicker from "../CustomFontPicker";
 import ImageUploadModal from "../Modals/Image/ImageUploadModal";
 import ExportImageModal from "../Modals/Image/ExportImageModal";
 import ImportProjectModal from "../Modals/Project/ImportProjectModal";
@@ -116,8 +116,8 @@ class Editor extends Component<Props, State> {
                   />
                 </Row>
                 <Row>
-                  <InputGroup className="my-33">
-                    <InputGroup.Prepend>
+                  <InputGroup className="my-33 special-drp-box">
+                    <InputGroup.Prepend className="special-drp-box">
                       <FontPicker
                         apiKey="12325343456"
                         activeFontFamily={this.state.textFont}
@@ -135,7 +135,7 @@ class Editor extends Component<Props, State> {
                   <InputGroup className="my-3">
                     <FormControl
                       placeholder={
-                        !this.state.editing ? "Add Text" : "Update Text"
+                        !this.state.editing ? "Text to add" : "Update Text"
                       }
                       aria-label="text"
                       name="textInput"
@@ -144,6 +144,12 @@ class Editor extends Component<Props, State> {
                       type="text"
                     />
                   </InputGroup>
+
+                  <ColorPicker
+                    defaultColor={this.state.currentColor}
+                    getColor={(color) => this.setState({ currentColor: color })}
+                  />
+
                   <InputGroup className="my-3">
                     <InputGroup.Prepend className="wide-btn-add">
                       <Button
@@ -178,18 +184,17 @@ class Editor extends Component<Props, State> {
                     </InputGroup.Prepend>
                   </InputGroup>
                 </Row>
-                <Row className="d-flex justify-content-center">
-                  <ColorPicker
-                    defaultColor={this.state.currentColor}
-                    getColor={(color) => this.setState({ currentColor: color })}
-                  />
-                </Row>
+
                 <Row className="flex-grow-1"></Row>
               </>
             ) : null}
           </Col>
           <Col className="d-flex flex-column">
-            <div className="mt-3">
+            <Canvas
+              tshirt="tshirt"
+              controller={(controller) => this.initCanvasController(controller)}
+            />
+            <div className="mt-3 quick-edit-btns">
               <Button
                 variant="danger"
                 disabled={this.state.selectedObjects.length === 0}
@@ -201,7 +206,7 @@ class Editor extends Component<Props, State> {
                 <i className="fas fa-trash mr-1"></i>
                 Delete Selected
               </Button>
-              <ButtonGroup aria-label="change object order" className="ml-2">
+              {/* <ButtonGroup aria-label="change object order" className="ml-2">
                 {Object.keys(CanvasOrderDirection).map((direction) => (
                   <Button
                     key={direction}
@@ -217,12 +222,8 @@ class Editor extends Component<Props, State> {
                     {direction}
                   </Button>
                 ))}
-              </ButtonGroup>
+              </ButtonGroup> */}
             </div>
-            <Canvas
-              tshirt="tshirt"
-              controller={(controller) => this.initCanvasController(controller)}
-            />
           </Col>
         </Row>
       </div>

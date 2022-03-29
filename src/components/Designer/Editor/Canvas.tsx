@@ -5,6 +5,7 @@ import { saveAs } from "file-saver";
 export interface CanvasController {
   canvas: fabric.Canvas;
   setBackground: () => void;
+  setScreenResize: () => void;
   addImage: () => void;
   addText: (text: string, fontFamily: string, textColor: string) => void;
   updateText: (
@@ -55,14 +56,74 @@ export default class Canvas extends Component<Props, State> {
   }
 
   setBackground = () => {
-    fabric.Image.fromURL(`images/${this.props.tshirt}.png`, (img) => {
+    const imgUrl = `images/${this.props.tshirt}.png`;
+    fabric.Image.fromURL(imgUrl, (img) => {
       img.center();
-      const h: number = img.getScaledHeight();
-      const w: number = img.getScaledWidth();
-      this.canvas.setHeight(h);
-      this.canvas.setWidth(w);
-      this.canvas.setBackgroundImage(img, () => {});
+      if (window.innerWidth > 1000) {
+        const h: number = img.getScaledHeight();
+        const w: number = img.getScaledWidth();
+        this.canvas.setHeight(h);
+        this.canvas.setWidth(w);
+        img.scaleToHeight(this.canvas.getHeight());
+        img.scaleToWidth(this.canvas.getWidth());
+        this.canvas.setBackgroundImage(
+          img,
+          this.canvas.renderAll.bind(this.canvas)
+        );
+      }
+      if (window.innerHeight >= 600 && window.innerWidth <= 1000) {
+        this.canvas.setHeight(400);
+        this.canvas.setWidth(400);
+        img.scaleToHeight(this.canvas.getHeight());
+        img.scaleToWidth(this.canvas.getWidth());
+        this.canvas.setBackgroundImage(
+          img,
+          this.canvas.renderAll.bind(this.canvas)
+        );
+      }
+      if (window.innerHeight >= 400 && window.innerWidth <= 600) {
+        this.canvas.setHeight(300);
+        this.canvas.setWidth(300);
+        img.scaleToHeight(this.canvas.getHeight());
+        img.scaleToWidth(this.canvas.getWidth());
+        this.canvas.setBackgroundImage(
+          img,
+          this.canvas.renderAll.bind(this.canvas)
+        );
+      }
     });
+  };
+  setScreenResize = () => {
+    const imgUrl = `images/${this.props.tshirt}.png`;
+    fabric.Image.fromURL(imgUrl, (img) => {
+      img.center();
+      //if window.innerHeight is greater than img.getScaledHeight
+      if (window.innerWidth > 1000) {
+        this.setBackground();
+      }
+      if (window.innerHeight >= 600 && window.innerWidth <= 1000) {
+        this.canvas.setHeight(400);
+        this.canvas.setWidth(400);
+        img.scaleToHeight(this.canvas.getHeight());
+        img.scaleToWidth(this.canvas.getWidth());
+        this.canvas.setBackgroundImage(
+          img,
+          this.canvas.renderAll.bind(this.canvas)
+        );
+      }
+      if (window.innerHeight >= 400 && window.innerWidth <= 600) {
+        this.canvas.setHeight(300);
+        this.canvas.setWidth(300);
+        img.scaleToHeight(this.canvas.getHeight());
+        img.scaleToWidth(this.canvas.getWidth());
+        this.canvas.setBackgroundImage(
+          img,
+          this.canvas.renderAll.bind(this.canvas)
+        );
+      }
+    });
+
+    console.log(this.canvas.getHeight(), this.canvas.getWidth());
   };
 
   addImage = () => {
@@ -175,6 +236,7 @@ export default class Canvas extends Component<Props, State> {
   };
 
   render() {
+    window.addEventListener("resize", this.setBackground);
     return <canvas id="c" style={{ border: "2px solid black" }} />;
   }
 }

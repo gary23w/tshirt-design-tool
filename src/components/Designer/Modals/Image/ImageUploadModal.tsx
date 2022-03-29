@@ -64,6 +64,7 @@ function ImageUploadModal({ canvas }: Props): ReactElement {
                   <Form.Label>URL to image: </Form.Label>
                   <FormControl
                     type="url"
+                    className="form-control-url-img"
                     placeholder="image url"
                     value={imageURL}
                     onChange={handleOnChange}
