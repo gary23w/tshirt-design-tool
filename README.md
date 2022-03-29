@@ -1,3 +1,3 @@
 # React Typescript/Axios/Node API/Mariadb
 
-![alt text](public/store1.png "Store")
+![alt text](public/store2.png "Store")
